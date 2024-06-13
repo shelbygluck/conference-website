@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ talk.title }}
+{% endblock %}
+
+
+{% block content %}
+    <h3>{{ talk.title }}</h3>
+    <p>{{ talk.title }}</p>
+    <p>{{ talk.abstract }}</p>
+    <p>Presented by {{ talk.speaker }}</p>
+
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'agenda:talks-edit' talk.id %}" class="btn btn-info">Edit</a></p>
+    {% endif %}
+    <p><a href="{% url 'agenda:talks-list' %}">Back to all talks</a></p>
+{% endblock %}

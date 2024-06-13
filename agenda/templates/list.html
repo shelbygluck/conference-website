@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Submitted sessions{% endblock %}
+
+{% block content %}
+    <h3>Submitted sessions</h3>
+
+    <!-- django loop through all talks using list-group and list-group-item -->
+    <div class="list-group">
+        {% for talk in talks %}
+        <a href="{% url 'agenda:talks-detail' talk.id %}" class="list-group-item list-group-item-action">
+            <section class="row">
+                <div class="col-7">{{ talk.title }}</div>
+                <div class="col-5 text-right">{{ talk.speaker }}</div>
+            </section>
+        </a>
+        {% endfor %}
+    </div>
+{% endblock %}
