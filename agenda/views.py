@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 from .models import Talk
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 # Create submit talk view
 class TalkSubmitView(LoginRequiredMixin, CreateView):
@@ -19,7 +20,9 @@ class TalkSubmitView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.speaker = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        messages.success(self.request, f'Thank you for submitting "{form.instance.title}" for consideration.')
+        return response
 
 # Create update talk view
 class TalkEditView(LoginRequiredMixin, UpdateView):
@@ -36,6 +39,7 @@ class TalkEditView(LoginRequiredMixin, UpdateView):
         return context
 
     def form_valid(self, form):
+        messages.success(self.request, f'Thank you for updating "{form.instance.title}".')
         return super().form_valid(form)
 
 # Create list view to display talks

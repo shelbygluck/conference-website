@@ -41,7 +41,12 @@
             </div>
         </section>
 
-
+<!-- Display Django messages -->
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
         
         {% block content %}{% endblock content %}
 
